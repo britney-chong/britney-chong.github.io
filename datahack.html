@@ -1,0 +1,374 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>DataHack</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/projects.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+                    <a href="index.html" class="image avatar"><img src="images/me.jpg" alt="" /></a>
+					<h1><strong>Britney Chong</strong>
+						<!--, this is my port--> <br />
+					Business Analytics | ChemE <br />
+					Seeking Summer/Fall 2023 positions <br />
+					Graduating May 2024 </a></h1>
+				</div>
+			</header>
+         
+        <!-- Header -->
+			<header id="header2">
+                <div class = "header2">
+                    <nav>
+                        <ul>
+                            <li><a href = "#intro">Introduction</a></li><br/>
+                            <br/>
+                            <li><a href = "#Initial Analysis with Generalized Linear Models">Initial Analysis with Generalized Linear Models</a></li><br/>
+                            <br/>
+                            <li><a href = "#Text Mining Headlines">Text Mining Headlines</a></li><br/>
+                            <br/>
+                            <li><a href = "#Natural Language Processing Sentiment Analysis">Natural Language Processing Sentiment Analysis</a></li><br/>
+                            <br/>
+                            <li><a href = "#Time Series Analysis">Time Series Analysis</a></li><br/>
+                            <br/>
+                            <li><a href = "#Conclusion">Conclusion</a></li><br/>
+    
+                        </ul>
+                    </nav>
+
+                </div>
+                
+				<div class="inner">
+					
+				</div>
+			</header>   
+        
+
+		<!-- Main -->
+			<div id="main">
+                
+
+                <section id="intro">
+                    <header class="major">
+                        <h1>Data Analysis of Clickbait Practices with Machine Learning</h1>
+                    </header>
+                    <hr />
+                    <h2>Research Question</h2>
+                    <ol>
+                        <li>Did Upworthy really change their clickbait publishing practices?</li>
+                        <li>What was the impact of that change?</li>
+                        <li>Do you recommend an investment in Upworthy?</li>
+                      </ol>
+                    <h3>Read CSV files</h3>
+                    <head>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+                        <script>hljs.initHighlightingOnLoad();</script>
+                        <style>
+                            pre {
+                                white-space: pre-wrap;
+                                overflow-x: auto;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <pre><code class="r">country_df = read.csv("country-data.csv") # aggregates user analytics by country
+daily_user_df = read.csv("daily-user-info.csv")   # user analytics from 2013 to 2015
+archive_df = read.csv("upworthy-archive.csv")     # A/B testing results
+</code></pre>
+                        
+                        <h3>Import packages</h3>
+                        
+                        <pre><code class="r">library(dplyr)
+library(ggplot2)
+library(stringr)
+</code></pre>
+                    </body>      
+                </section>
+
+				<!-- Content -->
+                <section id="Initial Analysis with Generalized Linear Models" class="main">
+
+                    <!-- Text -->
+                            <h2>Initial Analysis with Generalized Linear Models</h2>
+                            <p>We first defined clickbait as something that is attention-grabbing, emotionally arousing, and misleading. 
+                                Since, there are three different datasets with a total of 31 variables, we were able to consider different metrics for clickbait such as the clicks per impressions, the language of the headline, and the bounce rate of the article.
+                            </p>
+                            <pre><code class="r"># Data Wrangling
+# create numeric variable of winner for logistic regression
+archive_df$bWinner <- as.numeric(as.logical(archive_df$winner))
+# create clicks per impression variable
+archive_df$click_imp <- archive_df$clicks / archive_df$impressions
+</code></pre>
+                            <h3>Data Analysis on Clicks per Impression</h3>
+                            <pre><code class="r">click_glm = glm(bWinner ~ click_imp, data = archive_df)
+summary(click_glm)
+</code></pre>
+                            <pre><code class="r">## 
+## Call:
+## glm(formula = bWinner ~ click_imp, data = archive_df)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.45666  -0.05921  -0.04063  -0.02840   0.98741 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 0.0125876  0.0009084   13.86   <2e-16 ***
+## click_imp   2.4213110  0.0452874   53.47   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.04733763)
+## 
+##     Null deviance: 7274.5  on 150816  degrees of freedom
+## Residual deviance: 7139.2  on 150815  degrees of freedom
+## AIC: -32056
+## 
+## Number of Fisher Scoring iterations: 2
+</code></pre>
+
+                            <pre><code class="r">score_glm = glm(bWinner ~ score, data = archive_df)
+summary(score_glm)
+</code></pre>
+
+                            <pre><code class="r">## 
+## Call:
+## glm(formula = bWinner ~ score, data = archive_df)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.14370  -0.09941  -0.01599   0.01108   1.01280  
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -1.280e-02  7.752e-04  -16.52   <2e-16 ***
+## score        1.565e-03  1.363e-05  114.84   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.04435583)
+## 
+##     Null deviance: 7274.5  on 150816  degrees of freedom
+## Residual deviance: 6689.5  on 150815  degrees of freedom
+## AIC: -41868
+## 
+## Number of Fisher Scoring iterations: 2
+</code></pre>
+
+                            <pre><code class="r">cor.test(archive_df$bWinner, archive_df$click_imp)
+</code></pre>
+
+                            <pre><code class="r">## 
+##  Pearson's product-moment correlation
+## 
+## data:  archive_df$bWinner and archive_df$click_imp
+## t = 53.465, df = 150815, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.1314308 0.1413368
+## sample estimates:
+##       cor 
+## 0.1363872
+</code></pre>
+
+                            <pre><code class="r">cor.test(archive_df$bWinner, archive_df$score)
+</code></pre>
+
+                            <pre><code class="r">## 
+##  Pearson's product-moment correlation
+## 
+## data:  archive_df$bWinner and archive_df$score
+## t = 114.84, df = 150815, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.2789364 0.2882184
+## sample estimates:
+##       cor 
+## 0.2835841
+</code></pre>
+
+                            <pre><code class="r">ggplot(archive_df, aes(x = created_at, y = click_imp)) + geom_point(aes(color = winner)) + geom_smooth() + labs(title = "Clicks per Impressions over Time", x= "Date of A/B Test", y = "Clicks per Impressions")
+</code></pre>
+
+                            <pre><code class="r">## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+</code></pre>
+                            <div class="col-12"><span class="image fit"><img src="images/dh1.png" alt="" /></span></div>
+
+                            <p>After running a logistic regression model of winner and clicks per impression as well as score of the A/B test, the results show that there is a significant relationship between the two variables. However, the correlation is rather low and brings up the question why Upworthy did not select the article with the highest A/B testing score or clicks per impression.
+                            </p>
+                </section>
+
+                <section id="Text Mining Headlines" class="main">
+
+                    <!-- Text -->
+                                         
+                            <h2>Text Mining Headlines</h2>
+                                                        <pre><code class="r"># using punctuation to evaluate clickbait
+punctuations.dict <- c(question = "?",
+                       quote = "'",
+                       dollar = "$",
+                       exclaim = "!")
+archive_df$created_at <- as.Date(archive_df$created_at)
+archive_df$headline_nchar <- archive_df$package_headline %>% nchar()
+archive_df$headline_nwords <- archive_df$package_headline %>% str_count(" ") + 1
+
+for(i in punctuations.dict %>% names()){archive_df[[i]] <- ifelse(grepl(paste0("[",punctuations.dict[i],"]"), archive_df$package_headline), T, F) }
+</code></pre>
+                            <h3>Data Visualization on Punctuation</h3>
+                            <h4>Dollar Signs</h4>
+                            <pre><code class="r">archive_df %>% ggplot(aes(created_at, clicks/impressions, color = dollar)) + geom_smooth() + labs(title = "Clicks with Dollar Marks in Headline", x= "Date", y= "Total Clicks Per Impressions")
+</code></pre>
+
+                            <pre><code class="r">## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+</code></pre>
+                            <div class="col-12"><span class="image fit"><img src="images/dh2.png" alt="" /></span></div>
+                            <h4>Question Marks</h4>
+
+                            <pre><code class="r">archive_df %>% ggplot(aes(created_at, clicks/impressions, color = question)) + geom_smooth()+ labs(title = "Clicks with Question Marks in Headline", x= "Date", y= "Total Clicks Per Impressions")
+</code></pre>
+
+                            <pre><code class="r">## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+</code></pre>
+                            <div class="col-12"><span class="image fit"><img src="images/dh3.png" alt="" /></span></div>
+                            <h4>Quotes</h4>
+
+                            <pre><code class="r"archive_df %>% ggplot(aes(created_at, clicks/impressions, color = quote)) + geom_smooth() + labs(title = "Clicks with Quotes in Headline", x= "Date", y= "Total Clicks Per Impressions")
+</code></pre>
+
+                            <pre><code class="r">## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+</code></pre>
+                            <div class="col-12"><span class="image fit"><img src="images/dh4.png" alt="" /></span></div>
+                            <h4>Exclaimation Marks</h4>
+
+                            <pre><code class="r">archive_df %>% ggplot(aes(created_at, clicks/impressions, color = exclaim)) + geom_smooth() + labs(title = "Clicks with Exclaimation Marks in Headline", x= "Date", y= "Total Clicks Per Impressions")
+</code></pre>
+
+                            <pre><code class="r">## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+</code></pre>
+                            <div class="col-12"><span class="image fit"><img src="images/dh5.png" alt="" /></span></div>
+
+                            <p>We wanted to analyze the headlines of each article in the A/B testing packages and used punctuation as a metric for clickbait. Contrary to our original belief, the punctuation marks actually garnered less clicks during A/B testing.
+                            </p>
+                            
+                            <pre><code class="r">model.1 <- lm(click_imp ~ question+exclaim+dollar+quote+headline_nchar+headline_nwords, data = archive_df)
+summary(model.1)
+</code></pre>
+
+                            <pre><code class="r">## 
+## Call:
+## lm(formula = click_imp ~ question + exclaim + dollar + quote + 
+##     headline_nchar + headline_nwords, data = archive_df)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.017568 -0.008247 -0.003231  0.004563  0.168565 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)      1.236e-02  1.827e-04  67.614  < 2e-16 ***
+## questionTRUE    -1.842e-03  8.843e-05 -20.827  < 2e-16 ***
+## exclaimTRUE     -3.056e-03  2.342e-04 -13.047  < 2e-16 ***
+## dollarTRUE      -3.694e-03  3.939e-04  -9.380  < 2e-16 ***
+## quoteTRUE       -5.645e-04  6.508e-05  -8.674  < 2e-16 ***
+## headline_nchar   7.186e-05  4.141e-06  17.353  < 2e-16 ***
+## headline_nwords -1.237e-04  1.980e-05  -6.250 4.12e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.01232 on 150810 degrees of freedom
+## Multiple R-squared:  0.008937,   Adjusted R-squared:  0.008897 
+## F-statistic: 226.7 on 6 and 150810 DF,  p-value: < 2.2e-16
+</code></pre>
+                            <p> After running a linear model, we confirmed that the punctuation marks led to significantly less clicks per impression with the exception of number of characters in the headline.
+                            </p>
+                </section>
+                <section id="Natural Language Processing Sentiment Analysis" class="main">
+
+                    <!-- Text -->
+                        
+                            <h2>Natural Language Processing Sentiment Analysis</h2>
+                            <p>To view the NLP sentiment analysis model, view the Colab Notebook <a href="https://colab.research.google.com/drive/11nhDAOWKevdZQ1J4-eo2g0YU_heuWFjF?usp=sharing" target = "_blank"> here.</a><br/>
+                                <br/>
+                                In summary, using pre-trained neural networks of HuggingFace, we identified clickbait using sentiment analysis models to see if a collection of text is positive or negative.<br/>
+                                <br/>
+                                We evaluated that the overall strength of the sentiment does not decrease, but the headlines may be getting more positive near the date of the clickbait pledge.<br/>
+                                <br/>
+                                In a breakdown of each emotion, we found that most articles either conveyed joy or anger. Additionally, there was an overall increase in sentiments for winner articles overtime.</p>
+                </section>
+                <section id="Time Series Analysis" class="main">
+
+                    <!-- Text -->
+                        
+                            <h2>Time Series Analysis</h2>
+                            <h3>Loess Regression on Users</h3>
+                            <pre><code class="r"># Wrangle date variable and prepare loess
+daily_user_df$dayX <- as.Date(daily_user_df$day,format="%m/%d/%y")
+daily_user_df$index <- 1:nrow(daily_user_df)
+
+loess_users <- loess(users ~ index, data = daily_user_df, span=0.25)
+smoothed_users <- predict(loess_users)
+
+#create Loess regression
+plot(y = daily_user_df$users, x = daily_user_df$dayX, type="l", main="Loess Smoothing and Prediction on Users", xlab="Date", ylab="Users")
+lines(smoothed_users, x=daily_user_df$dayX, col="blue")
+</code></pre>
+<div class="col-12"><span class="image fit"><img src="images/dh6.png" alt="" /></span></div>
+
+                            <h3>Loess Regression on Bounce Rate</h3>
+                            <pre><code class="r">loess_bounce <- loess(bounce_rate ~ index, data = daily_user_df, span=0.25)
+smoothed_bounce <- predict(loess_bounce)
+
+#create Loess regression
+plot(y = daily_user_df$bounce_rate, x = daily_user_df$dayX, type="l", main="Loess Smoothing and Prediction on Bounce Rate", xlab="Date", ylab="Bounce Rate")
+lines(smoothed_bounce, x=daily_user_df$dayX, col="blue")
+</code></pre>
+<div class="col-12"><span class="image fit"><img src="images/dh7.png" alt="" /></span></div>
+                            <p>After evaluating the clickbait in articles, we then investigated its impact on the company. Using a Loess Regression model, it is predicted that the bounce rate of the articles will stay consistent while the amount of users for the website will decrease.
+                            </p>
+                </section>
+                <section id="Conclusion" class="main">
+
+                    <!-- Text -->
+                            <h2>Conclusion</h2>
+                            <p>After analyzing different clickbait metrics such as clicks per impression, sentiment analysis, and bounce rate, we determined that Upworthy has not changed their clickbait publishing practices. 
+                                However, the impact of the clickbait free pledge on the company has led to declining user engagement, retention, and new users. Due to the negative forecast on the website’s user analytics, we do not recomment an investment in Upworthy.</p>>
+                  </section>         
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+                    <br />  <br />
+					<ul class="icons">
+						<!--<li><a href=mailto:“britney.chong@utexas.edu? class="icon solid fa-file"><span class="label" target = "_blank">File</span></a></li>-->
+						<!--<li><a href="https://www.linkedin.com/in/britney-chong/" class="icon brands fa-kaggle" target = "_blank"><span class="label">Kaggle</span></a></li>-->
+						<li><a href="https://www.linkedin.com/in/britney-chong/" class="icon brands fa-linkedin" target = "_blank"><span class="label">LinkedIn</span></a></li>
+						<li><a href=mailto:“britney.chong@utexas.edu? class="icon solid fa-envelope"><span class="label" target = "_blank">Email</span></a></li>
+                        <li><a href="https://www.instagram.com/mlds_ut/?hl=en" class="icon brands fa-instagram" target = "_blank"><span class="label">Instagram</span></a></li>
+					</ul>
+					
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            <script src="assets/js/scroll.js"></script>
+
+
+	</body>
+</html>
