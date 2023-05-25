@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- saved from url=(0355)https://hubblecontent.osi.office.net/contentsvc/videohostpage/video?lcid=1033&syslcid=1033&uilcid=1033&app=3&ver=16&build=16.0.16327&platform=Win32&streamsso=true&appCorrelation=88B8A04B-A62F-4B43-A7FD-51186C9BCCAB&correlationId=D560BF03-52E5-4281-AE4F-D760BBD3C6BA&url=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F778052292%3Fh%3Dc875e41371%26app_id%3D122963 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Web Video</title>
+<style>
+body {
+   margin: 0;
+   width: 100%;
+   height: 100%;
+   background-color: #000000;
+   overflow: hidden;
+}
+
+html {
+   width: 100%;
+   height: 100%;
+   background-color: #000000;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100% !important;
+   height: 100% !important;
+}
+</style>
+   <style type="text/css">
+      a {
+         color: white;
+         text-decoration: none;
+         border-bottom: 1px solid #999999;
+      }
+
+      a:hover {
+         border-bottom-color: #EEEEEE;
+      }
+   </style>
+</head>
+
+<body style="">
+   <div class="embed-container" style="top: 200.5px;">
+      <iframe src="./Web Video_files/778052292.html" frameborder="0" width="640" height="360" allow="autoplay"></iframe>
+   </div>
+   <script src="./Web Video_files/VideoHostPageScripts"></script>
+
+   <script>
+      VideoHostPageUtils.setProvider("Vimeo");
+
+      if (window.parent && window.parent.postMessage) {
+         window.parent.postMessage({ name: "video-oembed-success", eventData: { eventname: "video-oembed-success" } }, '*');
+      }
+   </script>
+   <script>
+      var playerState = 'stopped';
+
+      var playVideo = function() {
+         document.querySelector('iframe').contentWindow.postMessage(JSON.stringify(
+            {
+               'method': 'play'
+            }), '*');
+         playerState = 'playing';
+         VideoHostPageUtils.logEvent('PlayVideo');
+      }
+
+      var pauseVideo = function() {
+         document.querySelector('iframe').contentWindow.postMessage(JSON.stringify(
+            {
+               'method': 'pause'
+            }
+         ), '*');
+         playerState = 'paused';
+         VideoHostPageUtils.logEvent('PauseVideo');
+      };
+
+      var stopVideo = function() {
+         document.querySelector('iframe').contentWindow.postMessage(JSON.stringify(
+            {
+               'method': 'unload'
+            }
+         ), '*');
+         playerState = 'stopped';
+         VideoHostPageUtils.logEvent('StopVideo');
+      };
+   </script>
+   <script type="text/javascript">
+      var doResize = function() {
+         var video = document.querySelector('.embed-container');
+         var currentStyle = window.getComputedStyle(video, null);
+         var currentHeight = parseFloat(currentStyle.height);
+         video.style.top = (window.innerHeight / 2) - (currentHeight / 2) + 'px';
+      }
+      window.onresize = doResize;
+      doResize();
+
+      
+         (function(){
+            var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+            var eventer = window[eventMethod];
+            var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
+            eventer(messageEvent, function (e) {
+               var message = e.data;
+               if (typeof  message === 'string' && JSON.parse(message).event === 'ready') {
+                  // vimeo is ready to play
+                  if (playerState === 'playing') {
+                     playVideo();
+                  }
+                  VideoHostPageUtils.logEvent('PlayerReady');
+               }
+            }, false);
+         }());
+      
+   </script>
+
+
+</body></html>
