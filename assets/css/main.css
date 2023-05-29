@@ -3229,7 +3229,7 @@ input, select, textarea {
 			}
 
 				#header h1 br {
-					display: none;
+					display: initial;
 				}
 
 		/* Footer */
