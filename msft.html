@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Hall of Fame Predictor for Basketball Memorabilia Investments</title>
+		<title>Automated Financial Reporting with AI</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/projects.css" />
@@ -32,17 +32,17 @@
                 <div class = "header2">
                     <nav>
                         <ul>
-                            <li><a href = "#intro">Introduction</a></li><br/>
+                            <li><a href = "#Project Summary"> Project Summary</a></li><br/>
                             <br/>
-                            <li><a href = "#Model Evaluation Results">Model Evaluation Results</a></li><br/>
+                            <li><a href = "#Project Objective"> Project Objective</a></li><br/>
                             <br/>
-                            <li><a href = "#Analysis and Model Improvement">Analysis and Model Improvement</a></li><br/>
+                            <li><a href = "#Workflow">Workflow</a></li><br/>
                             <br/>
-                            <li><a href = "#Investment Decisions">Investment Decisions</a></li><br/>
+                            <li><a href = "#Results & Business Impact">Results & Business Impact</a></li><br/>
                             <br/>
-                            <li><a href = "#Final Results">Final Results</a></li><br/>
+                            <li><a href = "#Technical Stack">Technical Stack</a></li><br/>
                             <br/>
-                            <li><a href = "#Index">Index</a></li><br/>
+                            <li><a href = "#Key Takeaway">Key Takeaway</a></li><br/>
                             <br/>
     
                         </ul>
@@ -62,196 +62,80 @@
 
                 <section id="intro">
                     <header class="major">
-                        <h1>Hall of Fame Predictor for Basketball Memorabilia Investments</h1>
+                        <h1>Automated Financial Reporting with AI</h1>
                     </header>
                     <hr />
-                   <p>In this project, real data on past basketball players is utilized to inform investment decisions in basketball memorabilia using machine learning techniques. The dataset consists of information on 495 players, including 27 different predictors or attributes for each player. These attributes are often abbreviated, and a complete list can be found at the end of this project documentation. <br/>
-                    <br/>
-                    The historical dataset, Hall-of-fame-train.arff, serves as the foundation for building a classification model that predicts the likelihood of a player's induction into the hall of fame, along with the corresponding probability. Subsequently, the model is applied to select players for potential investment opportunities. The primary objective of this assignment is to develop practical experience in developing and evaluating machine learning models to inform interventions, specifically investment decisions, with the ultimate goal of maximizing profitability. <br/>
-                    <br/>
-                    The dataset includes a target variable, which indicates whether a player has been inducted into the hall of fame. It is worth noting that in this dataset, players who have not been inducted 45.4 years after retirement are assumed to never be inducted. The target variable is binary, with a value of 1 representing induction and 0 indicating non-induction. The data includes the actual target variable value for each player, enabling evaluation of the effectiveness of investment decisions and facilitating comparisons among investments selected by different models to identify the most optimal model for future use. <br/>
-                    <br/>
-                    Here is the <a href="https://colab.research.google.com/drive/1F4sYCji6jyfr7BoxkLhWmxKLbKliR6Z9?usp=sharing" target = "_blank"> code.</a><br/>
-                    </p>
-                    <h3>Libraries</h3>
+                   <p>As part of the Microsoft Business Analytics Capstone, I led the development of an end-to-end automation pipeline that transformed manual, time-consuming financial reporting processes into a fully automated solution. The focus was on streamlining month-end financial analysis for accounts receivable, including both data visualization and commentary generation.
+			   <p />
+                    <h3></h3>
                     <head>
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
-                        <script>hljs.initHighlightingOnLoad();</script>
-                        <style>
-                            pre {
-                                white-space: pre-wrap;
-                                overflow-x: auto;
-                            }
-                            
-                        </style>
+                       
                     </head>
                     <body>
-                        <pre><code class="Python">import numpy as np
-from matplotlib import pyplot as plt
-import pandas as pd
-import requests
-import arff
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, RocCurveDisplay, accuracy_score, confusion_matrix,accuracy_score, roc_curve, auc # plot evaluations
-from sklearn.model_selection import cross_val_score, cross_val_predict
-</code></pre>
-                        
-                        <h3>Dataset</h3>
-
-                        <pre><code class="Python">df_csv = pd.read_csv('https://utexas.box.com/shared/static/24dmtadnoxzjqwm04tpdjseqz1msclyk.csv')
-</code></pre>
                     </body>      
                 </section>
 
 				<!-- Content -->
-                <section id="Model Testing Results" class="main">
+                <section id="Project Objective" class="main">
 
                     <!-- Text -->
-                            <h2>Model Evaluation Results</h2>
-                            <p>Using 10-fold cross validation, it was determined that the best model is a decision tree for this set of data.
-                            </p>
-                            <pre><code class="Python">Decision Tree CV Average Score: 0.9757142857142858
-Bagging Model  CV Average Score: 0.969673469387755
-Random Forest  CV Average Score: 0.9716326530612245
-Naive Bayes  CV Average Score: 0.8866938775510202
-K Neighbor  CV Average Score: 0.9697142857142855
-</code></pre>
-                            <p>Using the area under the ROC curve, it was determined that the best model is a bagging model.
-                            </p>
-                            <pre><code class="Python">AUC score Decision Tree: 0.9144444444444444
-AUC score Bagging: 0.9575555555555555
-AUC score Random Forest Tree: 0.9566666666666668
-AUC score MultinomialNB: 0.8939444444444444
-AUC score KNeighbor: 0.9105555555555555
-</code></pre>
-                            <p>ROC area is more appropriate because the models are working with an imbalanced dataset. To be inducted into the Hall of Fame is a rare event which means that this is an imbalanced dataset. When using classification accuracy, it is possible that a model seems very accurate because it predicted that most players will not be inducted, but that may not be accurate because the number of players that actually get inducted is already very small. An ROC curve takes this into account because it takes into account the true postive rate and false postive rate and asseses the model's ability to distinguish between the them. The fact that a dataset is imbalanced will not affect the assessment outcome.
-                            </p>
+                            <h2>Project Objective</h2>
+                          <ul>
+  <li>Microsoft’s finance team was manually preparing recurring PowerPoint presentations summarizing accounts receivable performance.</li>
+  <li>Each cycle involved data extraction, cleansing, analysis, chart generation, and drafting narrative commentary—consuming dozens of analyst hours per month.</li>
+  <li>The project aimed to automate both the visual and narrative components of the reporting pipeline to save time, increase consistency, and reduce error.</li>
+</ul>
                 </section>
 
-                <section id="Analysis and Model Improvement" class="main">
+                <section id="Workflow" class="main">
 
                     <!-- Text -->
                                          
-                            <h2>Analysis and Model Improvement</h2>
-                            <p>To select the the best features for prediction, features were evaluated based on information gain, chi-square, and correlation matrix.
-                            </p>
-                            
-                                                        <pre><code class="Python">Info gain top 3 features:  Index(['fga', 'fta', 'ftm'], dtype='object')
-Chi-square top 3 features:  Index(['minutes', 'pts', 'fga'], dtype='object')
-</code></pre>
-                            <h4>Correlation Matrix Results</h4>
-                            <pre><code class="Python">ftm    0.712440
-fta    0.711321
-fga    0.688851</code></pre>
-
-                        <p>In this scenario, class or whether or not a player is inducted to the hall of fame is made to be binary. The correlation coefficient can be used to measure the relationship between the binary variable and continous variables. Information gain and correlation matrix have an identical consesus on the top three features (ftm, fta, fga) while Chi-squared only has fga in common with info gain and correlation matrix. <br/>
-                        <br/>
-                        It is also important to note that statistics such as points, assists, and rebounds that are represented as a cumulative value over a player's careers are not informative predictor for both young and older players' likelihood of being inducted to the Hall of Fame because players with longer careers my have higher cumulative values simply because they have been playing longer, not because they play better than players with shorter careers. To make these predictors useful, using averages or ratios instead may adjust for career length. For example, instead of using total points over a player's career, using average points per game may be more predictive for both age groups. There would be less bias towards older players since older players. Older playeres likely will have been playing longer and will therefore more likely have higher cumulative statistics which is biased.
-                        </p>
-
-                        <p>The model was further refined by creating and removing features and evaluated based on the cross-validation score. This involved using backwards selection. Wrapper method was attempted but were not successful due to RAM limitations. Some features that were created were from turning cumulative values into ratios instead. For more details refer to the code or refer to the index for attribute descriptions. The general results are listed below.</p>
-
-                            <pre><code class="Python">Dropped:  Index(['fga', 'Position_F', 'league_N', 'tpm', 'lastSeason', 'Position_C',
-       'games', 'asts', 'pts', 'Position_G', 'minutes', 'careerEnded',
-       'defReb', 'fta', 'league_A', 'fgm', 'turnover', 'stl', 'blk',
-       'firstSeason', 'offReb', 'tpa', 'reb', 'totalSeasons', 'yrsRetired2004',
-       'ftm'],
-      dtype='object')
-Kept:  Index(['pf', 'ft_ratio', 'fg_ratio', 'fga_ratio'], dtype='object')
-</code></pre>
+                            <h2>Workflow</h2>
+                            <ul>
+  <li>Data extraction: Accounts receivable data was exported from internal financial systems as structured Excel files.</li>
+  <li>Data preprocessing: Cleaned and structured the raw Excel data using Python’s pandas and numpy libraries.</li>
+  <li>Data visualization: Automated generation of summary charts using matplotlib and seaborn to visualize aging, overdue accounts, and trends.</li>
+  <li>Automated narrative generation: Used OpenAI language models and prompt engineering to generate written analysis based on key metrics and trends in the data.</li>
+  <li>Report assembly: Used the python-pptx library to automate creation of formatted PowerPoint slides combining both charts and AI-generated commentary.</li>
+  <li>Delivery: Delivered reusable, end-to-end automation pipeline that produced fully formatted financial reports with minimal human intervention.</li>
+</ul>
 
                 </section>
-                <section id="Investment Decisions" class="main">
+                <section id="Results & Business Impact" class="main">
 
                     <!-- Text -->
                         
-                            <h2>Investment Decisions</h2>
-                            <p>Assume this project involves working with a budget of $4,000,000 to invest in players' memorabilia. The cost of each piece is $40,000, and a maximum of 100 players' memorabilia can be purchased. The challenge is that we don't know which players will be inducted into the hall of fame. The NBA will release this information in the future, and we need to make investment decisions before that happens.
-                                <br/>
-                                <br/>
-                                There are two possible outcomes for our investments. If we invest in a player who later becomes a hall of famer, we can expect a revenue of $120,000 when selling their memorabilia. However, if we invest in a player who is not inducted, we will lose 50% of our initial investment, which is $20,000.
-                                <br/>
-                                <br/>
-                                The goal is to develop, evaluate, and apply an investment strategy. This strategy involves choosing a predictive model to estimate the probability of a player's induction and determining a threshold probability above which it is profitable to invest. We need to carefully consider these factors to maximize our profitability and make informed investment decisions.
-                                <br/>
-                                <br/>
-                                First, the modified data is split into training and testing. Using the features selected above, each model is evaluated again. 
-                                The most approriate evaluation measure for selecting which players to invest in would be a profit chart. We need to know how much profit is being made with each number of investments made. The profit chart made in this context would show the expected profit or loss from investing in a certain number of players. The goal is to maximize profit and that is most observable using a profit chart to determine the optimal model and threshold that maximize profit. A lift chart would not be suitable because it only shows the effectivenss of a binary classifier rather than determining the maximum profit possible.
-                            </p>
-                            <div class="col-12"><span class="image fit"><img src="images/pc1.png" alt="" /></span></div>
-                            <pre><code class="Python">Optimal probability for decision tree model is 1.0 with profit $1,060,000
-Optimal probability for bagging model is 0.2 with profit $1,400,000
-Optimal probability for random forest model is 0.28 with profit $1,520,000
-Optimal probability for naive bayes model is 0.9012 with profit $920,000
-Optimal probability for KNN model is 0.4 with profit $1,140,000
-</code></pre>
-
-                            <pre><code class="Python">AUC score Decision Tree: 0.8625
-AUC score Bagging: 0.9521111111111111
-AUC score Random Forest Tree: 0.9777222222222222
-AUC score MultinomialNB: 0.8939444444444444
-AUC score KNeighbor: 0.9105555555555555
-</code></pre>
-
-                            <p>The model with the best performance is the Random Forest model with an optimal probability threshold of 0.28 and a profit of $1,520,000. The profit chart showed that the Random Forest Model has a steady increase in profit as the probility threshold increases with a significant increase when the threshold is 0.28. The Random Forest model also has the highest AUC score of 0.978 which indicates high accuracy. The other models show slower increases in profit according to the profit chart an have lower AUC scores.
-                            </p>
+                            <h2>Results & Business Impact</h2>
+                           <ul>
+  <li>Reduced manual reporting effort by over 130 hours per reporting cycle, significantly improving reporting efficiency.</li>
+  <li>Enabled faster delivery of financial insights to leadership, improving decision-making speed during monthly reviews.</li>
+  <li>Standardized report formatting and commentary generation, reducing inconsistencies across reporting cycles.</li>
+  <li>Demonstrated successful integration of generative AI and automation tools into financial reporting workflows, laying the foundation for future automation initiatives.</li>
+</ul>
 
                             </section>
-                <section id="Final Results" class="main">
+                <section id="Technical Stack" class="main">
 
                     <!-- Text -->
                         
-                            <h2>Final Results</h2>
-                             <p>To invest in a player's memorabilia, the predicted probability of induction should be above the threshold of 0.28. Players with higher probability of induction should be prioritized for investment.
-                            The strategy will involve using the random forest model to predict the probability of induction for each player and select players above the threshold. This will also consider the $4,000,000 budget and limit to a max of 100 players.
-                            </p>
-                            <p>According to the model, the target players are 73,  87, 114, 228,  83, 330,  80, 179, 394,  10, 397,  14, 415,
-                                427, 287,  24, 204, 112, 340, 353, 209, and 175 generating a potential profit of $1,160,000.</p>
+                            <h2>Technical Stack</h2>
+                            <ul>
+  <li>Python (matplotlib, bs4, pptx, pandas, numpy)</li>
+  <li>OpenAI API (for generative AI-powered financial commentary)</li>
+  <li>Microsoft Excel (data preparation and validation)</li>
+  <li>SQL (data extraction and initial data preparation)</li>
+  <li>PowerPoint (automated slide deck generation)</li>
+</ul>
                 </section>
-                <section id="Index" class="main">
+                <section id="Key Takeaway" class="main">
 
                     <!-- Text -->
                         
                             <h2>Index</h2>
-                            <pre><code class="Python">## Attribute Descriptions
+                           <p>This project demonstrates how blending AI-powered narrative generation, Python automation, and financial domain expertise can radically improve reporting efficiency. By automating both data visualization and executive commentary, the finance team was able to accelerate their reporting cycle while improving consistency and freeing analysts to focus on strategic insights.
 
-league| N = National Basketball Association (NBA); A = American Basketball Association (ABA)
-games|games played
-minutes|minutes played
-pts|points
-offReb|offensive rebounds
-defReb|defensive rebounds
-reb|rebounds
-asts|assists
-stl|steals* (see below)
-blk|blocks* (see below)
-turnover|turnovers* (see below)
-pf|Personal Fouls
-fga|field goals attempted
-fgm|field goals made
-fta|free throws attempted
-ftm|free throws made
-tpa|three pointers attempted* (see below)
-tpm|three pointers made* (see below)
-
-totalSeasons|Total number of seasons played. This value is calculated as follows: "lastSeason - firstSeason + 1"
-
-position|C = Center; F = Forward; G = Guard
-
-firstSeason|First season played. The year corresponds to the first year of the season (i.e. a value of 2000 represents the 2000-2001 season). 
-
-lastSeason|Last season played. The year corresponds to the first year of the season (i.e. a value of 2000 represents the 2000-2001 season). Note that 2004 (2004-2005 season) is the last year for which there is data. 
-
-careerEnded|Boolean field for if the player's career has ended (1 if career has ended, 0 otherwise). This field was calculated as follows: if the "lastSeason" field is earlier than 2004, the value is 1, otherwise 0. Note that this calculation naively assumes that no players retired at the end of the 2004  season.
-
-yrsRetired2004|The number of seasons that a player has been retired as of the 2004-2005 season.
-
-class|A Boolean field showing whether or not a player was inducted to the Basketball Hall of Fame (HoF) as a player. This field has value 1 if the player has been inducted, and 0 otherwise.
-
-
-* The NBA did not have three point shots until 1979
-* Steals, Blocks and Turnovers were not recorded in the NBA until 1973
-                                </code></pre>
+</p>
                              
                 </section>
                             
@@ -264,7 +148,7 @@ class|A Boolean field showing whether or not a player was inducted to the Basket
 						<!--<li><a href=mailto:“britney.chong@utexas.edu? class="icon solid fa-file"><span class="label" target = "_blank">File</span></a></li>-->
 						<!--<li><a href="https://www.linkedin.com/in/britney-chong/" class="icon brands fa-kaggle" target = "_blank"><span class="label">Kaggle</span></a></li>-->
 						<li><a href="https://www.linkedin.com/in/britney-chong/" class="icon brands fa-linkedin" target = "_blank"><span class="label">LinkedIn</span></a></li>
-						<li><a href=mailto:“britney.chong@utexas.edu? class="icon solid fa-envelope"><span class="label" target = "_blank">Email</span></a></li>
+						<li><a href=mailto:“britney.chong@gmail.com? class="icon solid fa-envelope"><span class="label" target = "_blank">Email</span></a></li>
 					</ul>
 					
 					</ul>
