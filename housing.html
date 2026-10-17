@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Schools Over Square Footage: What Predicts Austin Home Prices</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/projects.css" />
+</head>
+<body class="is-preload">
+
+<!-- Header -->
+<header id="header">
+    <div class="inner">
+        <a href="index.html" class="image avatar"><img src="images/pfp.jpg" alt="" /></a>
+        <h1><strong>Britney Chong</strong><br /> Data Analytics</h1>
+    </div>
+</header>
+
+<!-- Navigation -->
+<header id="header2">
+                <div class = "header2">
+                    <nav>
+                        <ul>
+                            <li><a href = "#Project Summary"> Project Summary</a></li><br/>
+                            <br/>
+                            <li><a href = "#Project Objective"> Project Objective</a></li><br/>
+                            <br/>
+                            <li><a href = "#Workflow">Workflow</a></li><br/>
+                            <br/>
+                            <li><a href = "#Results & Impact">Results & Impact</a></li><br/>
+                            <br/>
+                            <li><a href = "#Technical Stack">Technical Stack</a></li><br/>
+                            <br/>
+                            <li><a href = "#Key Takeaway">Key Takeaway</a></li><br/>
+                            <br/>
+    
+                        </ul>
+                    </nav>
+
+                </div>
+                
+				<div class="inner">
+					
+				</div>
+			</header>   
+
+<!-- Main -->
+<div id="main">
+
+    <section id="intro">
+        <header class="major">
+            <h1>Schools Over Square Footage: What Predicts Austin Home Prices</h1>
+        </header>
+        <hr />
+        <p>
+            This team project analyzed over 15,000 Austin, Texas home listings to identify which property, location, and school attributes drive sale prices across zip codes. After cleaning mispriced listings and engineering new features, I helped build and tune machine learning models that predict home prices with an R² of 0.75, revealing that school quality and location matter more than home size or waterfront access.
+        </p>
+    </section>
+
+    <section id="Project Objective" class="main">
+        <h2>Project Objective</h2>
+        <ul>
+            <li>Identify which house attributes, school metrics, and location factors most strongly influence home prices across Austin zip codes.</li>
+            <li>Build accurate, interpretable regression models that can inform where to live and what to prioritize when buying.</li>
+            <li>Examine how price levels and volatility differ across Austin, from West Austin along the Colorado River to East Austin.</li>
+        </ul>
+    </section>
+
+    <section id="Workflow" class="main">
+        <h2>Workflow</h2>
+        <ul>
+            <li>Cleaned the raw dataset by validating suspicious listings against Zillow and applying price bounds (a $100,990 floor and a 1.5x IQR ceiling), reducing 15,171 listings to 14,038 reliable records.</li>
+            <li>Explored distributions of sales, prices, construction trends, and school-related correlations across zip codes and decades to guide modeling decisions.</li>
+            <li>Analyzed construction trends by decade and year, identifying a lot size outlier that inflated the 1950s average and construction dips that preceded major economic downturns.</li>
+            <li>Engineered features such as decade built and stories-to-living-area ratio, with the ratio ranking in the Random Forest's top 10 most important features.</li>
+            <li>Trained Linear Regression, Random Forest, and Gradient Boosting models, tuning the tree-based models with 5-fold cross-validated grid search.</li>
+            <li>Compared models using RMSE, MSE, and R², then ranked feature importance to explain what drives predictions.</li>
+            <li>Analyzed price standard deviations by zip code to quantify market volatility and risk across regions.</li>
+        </ul>
+    </section>
+
+    <section id="Results and Impact" class="main">
+        <h2>Results and Impact</h2>
+        <ul>
+            <li>Random Forest performed best with an R² of 0.752 and test RMSE of about $86K, closely followed by Gradient Boosting (R² of 0.748), while Linear Regression performed worse than predicting the average price.</li>
+            <li>Average school rating, living area, and latitude/longitude were the strongest price drivers, while waterfront features and views ranked among the least important.</li>
+            <li>West Austin zip codes showed price standard deviations above $800K compared to under $60K in several East Austin zip codes, highlighting where buyers face more price risk.</li>
+        </ul>
+    </section>
+
+    <section id="Technical Stack" class="main">
+        <h2>Technical Stack</h2>
+        <ul>
+            <li>Data Analysis: Python (pandas, NumPy), groupby aggregation, correlation analysis, outlier detection</li>
+            <li>Visualization: Matplotlib, pandas plotting, box plots, time series line charts, geographic scatter plots</li>
+            <li>Modeling: Python (scikit-learn), Linear Regression, Random Forest, Gradient Boosting, GridSearchCV</li>
+            <li>Evaluation Metrics: RMSE, MSE, R², cross-validation, feature importance</li>
+        </ul>
+    </section>
+
+    <section id="Key Takeaways" class="main">
+        <h2>Key Takeaways</h2>
+        <ul>
+            <li>School quality and location outweighed physical home features in predicting price, showing that neighborhood context matters more than the house itself.</li>
+            <li>Data cleaning had major impact, since mispriced listings like a $5,500 lakefront home would have distorted the models.</li>
+            <li>The link between school quality and home prices points to a feedback loop that can widen inequality, which is a direction for future socioeconomic analysis.</li>
+        </ul>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <ul class="icons">
+            <li><a href="https://www.linkedin.com/in/britney-chong/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+            <li><a href="mailto:britney.chong@gmail.com" class="icon solid fa-envelope"><span class="label" target="_blank">Email</span></a></li>
+        </ul>
+    </div>
+</footer>
+
+<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            <script src="assets/js/scroll.js"></script>
+            <script src="assets/js/csvnba.js"></script>
+            <script src="assets/js/papaparse.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+</body>
+</html>
